@@ -1,0 +1,12 @@
+data_path: data/sample.txt
+output_path: artifacts/model.pt
+seed: 42
+block_size: 32
+n_embd: 64
+n_head: 4
+n_layer: 2
+dropout: 0.1
+batch_size: 16
+steps: 100
+learning_rate: 0.001
+eval_interval: 25
