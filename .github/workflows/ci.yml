@@ -16,4 +16,5 @@ jobs:
       - name: Test
         run: docker compose run --rm app pytest -q
       - name: Dependency audit
-        run: docker compose run --rm app sh -c 'uv export --locked --no-dev --no-hashes --no-emit-project > /tmp/requirements.txt && pip-audit -r /tmp/requirements.txt'
+        run: |
+          docker compose run --rm app sh -c "uv export --locked --no-hashes --no-emit-project | sed 's/+cpu//' > /tmp/requirements.txt && pip-audit --disable-pip --no-deps -r /tmp/requirements.txt"
