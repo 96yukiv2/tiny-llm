@@ -35,6 +35,6 @@ docker compose run --rm app ruff check .
 docker compose run --rm app pytest -q
 ```
 
-依存関係は `uv.lock` で固定し、CI でテスト、静的チェック、実行時依存関係の脆弱性監査を実行します。Dependabot は uv、Docker、GitHub Actions の更新を確認します。既知の脆弱性の有無は時間とともに変わり、監査ですべてを検出できるわけではありません。
+依存関係は `uv.lock` で固定し、CI でテスト、静的チェック、開発用を含む Python 依存関係の脆弱性監査を実行します。Dependabot は uv、Docker、GitHub Actions の更新を確認します。既知の脆弱性の有無は時間とともに変わり、監査ですべてを検出できるわけではありません。監査では PyTorch の CPU ビルドの `+cpu` を取り除き、対応する PyPI のバージョンとして照合します。Docker ベースイメージの OS パッケージはこの監査の対象外です。
 
 モデルの処理は [構造の説明](docs/architecture.md) を参照してください。学習やサンプリングの条件は `configs/tiny.yaml` と `tiny-llm generate --help` で確認できます。
