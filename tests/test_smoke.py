@@ -21,4 +21,4 @@ def test_cli_train_save_and_generate(tmp_path):
                              str(checkpoint), "--prompt", "こんにちは", "--length", "4"],
                             check=True, text=True, capture_output=True)
     assert result.stdout.startswith("こんにちは")
-    assert len(result.stdout.strip()) >= len("こんにちは") + 3  # Generated text may contain newlines.
+    assert len(result.stdout.removesuffix("\n")) == len("こんにちは") + 4

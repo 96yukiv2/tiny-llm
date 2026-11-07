@@ -13,6 +13,7 @@ def generate(checkpoint_path: str, prompt: str, length: int = 100,
     if length < 0 or temperature <= 0:
         raise ValueError("length must be non-negative and temperature must be positive")
     torch.manual_seed(seed)
+    torch.set_num_threads(1)  # Avoid thread overhead for tiny CPU inference.
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
     if checkpoint.get("format_version") != 1:
         raise ValueError("Unsupported checkpoint format")
