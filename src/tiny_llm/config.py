@@ -33,7 +33,7 @@ def load_config(path: str | Path) -> TrainConfig:
     with open(path, encoding="utf-8") as file:
         data = yaml.safe_load(file)
     if not isinstance(data, dict):
-        raise ValueError("Configuration must be a mapping")
+        raise ValueError("Configuration must be a mapping")  # noqa: TRY004 - invalid file content
     expected = {field.name for field in fields(TrainConfig)}
     if set(data) != expected:
         raise ValueError(f"Configuration keys: missing={sorted(expected - set(data))}, "
