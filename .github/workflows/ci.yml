@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker compose build
+      - name: Lint
+        run: docker compose run --rm app ruff check .
+      - name: Test
+        run: docker compose run --rm app pytest -q
+      - name: Dependency audit
+        run: |
+          docker compose run --rm app sh -c "uv export --locked --no-hashes --no-emit-project | sed 's/+cpu//' > /tmp/requirements.txt && pip-audit --disable-pip --no-deps -r /tmp/requirements.txt"

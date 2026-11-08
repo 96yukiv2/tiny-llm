@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data:ro
+      - ./configs:/app/configs:ro

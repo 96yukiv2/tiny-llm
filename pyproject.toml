@@ -1,0 +1,30 @@
+[project]
+name = "tiny-llm"
+version = "0.1.0"
+description = "A small character-level Transformer for learning how language models work"
+requires-python = ">=3.12,<3.13"
+dependencies = ["torch==2.15.0", "PyYAML==6.0.3"]
+
+[project.scripts]
+tiny-llm = "tiny_llm.cli:main"
+
+[dependency-groups]
+dev = ["pytest==9.0.3", "ruff==0.15.4", "pip-audit==2.10.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
