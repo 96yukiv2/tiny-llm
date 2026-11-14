@@ -9,7 +9,7 @@ dependencies = ["torch==2.15.0", "PyYAML==6.0.3"]
 tiny-llm = "tiny_llm.cli:main"
 
 [dependency-groups]
-dev = ["pytest==9.2.0", "ruff==0.17.3", "pip-audit==2.10.1"]
+dev = ["pytest==9.2.0", "ruff==0.17.4", "pip-audit==2.10.1"]
 
 [build-system]
 requires = ["hatchling"]
